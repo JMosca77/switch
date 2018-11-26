@@ -1,0 +1,47 @@
+<div class='card'>
+        <div class='card-header'>
+          {{pageTitle}}
+        </div>
+        <div class='card-body'>
+          <div class='row'>
+            <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-4'>
+              <input [(ngModel)]='listFilter' type='text'/>
+            </div>
+          </div>
+          <div class='row'
+               *ngIf='listFilter'>
+            <div class='col-md-6'>
+              <h4>Filtered by: {{listFilter}}</h4>
+            </div>
+          </div>
+          <div class='table-responsive'>
+            <table class='table' 
+                        *ngIf='switches && switches.length' >
+              <thead>
+                <tr>
+                  <th>
+                    <button class='btn btn-primary' (click)='toggleSwitchCode()'>{{showSwitchCode ? 'Hide' : 'Show'}} Switch Key Name</button>
+                  </th>
+                  <th>Switch Name</th>
+                  <th *ngIf='showSwitchCode'>Switch Code</th>
+                  <th>State</th>
+                  <th>Description</th>
+                </tr>
+                    </thead>
+              <tbody>
+                    <tr *ngFor='let switch of filteredSwitches'>
+                        <td><img [src] = 'onUrl'
+                            [style.width.px] = 'imageWidth'
+                            [style.margin.px] = 'imageMargin'
+                          ></td>
+                        <td>{{ switch.switchName }}</td>
+                        <td *ngIf='showSwitchCode'>{{ switch.switchCode }}</td>
+                        <td>{{ switch.switchState }}</td>
+                        <td>{{ switch.switchDescription | uppercase}}</td>
+                    </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
